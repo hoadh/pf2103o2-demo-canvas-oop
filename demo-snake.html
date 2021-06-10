@@ -20,22 +20,34 @@
         // biến toàn cục (global)
         const LEFT = 1, RIGHT = 2, UP = 3, DOWN = 4;
         const SPEED = 50;
-
-        let snake_x = 0;
-        let snake_y = 0;
-        let direction = RIGHT;
+        let direction = DOWN;
         
-        function drawSnake(x, y) {
+        let snakes = [
+            [0, 150],
+            [0, 100],
+            [0, 50],
+            [0, 0],
+        ];
+        
+        function drawSnake() {
             context.fillStyle = "yellow";
-            context.fillRect(x, y, 50, 50);
+            for (let i = 0; i < snakes.length; i++) {
+                let x = snakes[i][0];
+                let y = snakes[i][1];
+                context.fillRect(x, y, 50, 50);
+            }
+            
         }
 
         fillBackground();
-        drawSnake(snake_x, snake_y);
+        drawSnake();
 
         setInterval(function() {
 
             context.clearRect(0, 0, 500, 500);
+
+            let snake_x = snakes[0][0];
+            let snake_y = snakes[0][1];
 
             switch (direction) {
                 case LEFT:
@@ -52,9 +64,11 @@
                     break;
             }
             
+            snakes.pop(); // xóa vị trí đuôi rắn
+            snakes.unshift([ snake_x, snake_y ]); // di chuyển đầu rắn
 
             fillBackground();
-            drawSnake(snake_x, snake_y);
+            drawSnake();
         }, 300);
 
         window.addEventListener("keydown", function(e) {
