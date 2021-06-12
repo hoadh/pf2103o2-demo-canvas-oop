@@ -44,7 +44,7 @@
 
         setInterval(function() {
 
-            context.clearRect(0, 0, 500, 500);
+            context.clearRect(0, 0, 500, 500); // Xóa màn hình
 
             let snake_x = snakes[0][0];
             let snake_y = snakes[0][1];
@@ -67,8 +67,8 @@
             snakes.pop(); // xóa vị trí đuôi rắn
             snakes.unshift([ snake_x, snake_y ]); // di chuyển đầu rắn
 
-            fillBackground();
-            drawSnake();
+            fillBackground(); // Vẽ game (game.drawScreen())
+            drawSnake();      // snake.draw()
         }, 300);
 
         window.addEventListener("keydown", function(e) {

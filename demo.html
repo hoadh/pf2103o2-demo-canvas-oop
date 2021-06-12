@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+</head>
+<body>
+
+    <canvas id="game_screen" width="500px" height="500px" style="border: 1px black solid"></canvas>
+    
+    <script>
+
+        let canvas = document.getElementById("game_screen");
+        let context = canvas.getContext("2d");
+
+        function drawTriangle() {
+            context.beginPath();
+            context.fillStyle = '#7a126d';
+            context.moveTo(300, 0);
+            context.lineTo(300, 50);
+            context.lineTo(350, 50);
+            context.closePath();
+            context.fill();
+        }
+
+        function drawBus() {
+            context.fillStyle = "#7a126d";
+            context.fillRect(50, 0, 250, 50);
+
+            context.fillStyle = "#7a126d";
+            context.fillRect(50, 50, 300, 50);
+
+            context.beginPath();
+            context.arc(300, 120, 40, 0, 2 * Math.PI);
+            context.fillStyle = "#7a126d";
+            context.fill();
+
+            context.beginPath();
+            context.arc(100, 120, 40, 0, 2 * Math.PI);
+            context.fillStyle = "#7a126d";
+            context.fill();
+        }
+
+        // context.font = "30px Courier New";
+        // context.fillText("My Racing Game", x, 450)
+
+        let x = 50;
+        let x2 = 450;
+
+        function drawCircle(startX, y) {
+            context.beginPath();
+            context.arc(startX, y, 50, 0, 2 * Math.PI);
+            context.stroke();
+        }
+        
+        setInterval( function() {
+
+            // xóa toàn bộ màn hình cũ
+            context.clearRect(0, 0, 500, 500);
+
+            // di chuyển đường tròn từ trái sang phải
+            x = x + 10;
+            x2 = x2 - 10;
+
+            drawCircle(x, 450);
+            drawCircle(x2, 400);
+            drawBus();
+            drawTriangle();
+        }, 1000 );
+
+    </script>
+</body>
+</html>
